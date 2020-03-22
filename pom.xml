@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com</groupId>
-	<artifactId>bav</artifactId>
+	<artifactId>jav</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>bav</name>
-	<description>Demo project for Spring Boot</description>
+	<name>jav</name>
+	<description>JAV</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -53,6 +53,11 @@
 			<groupId>com.github.briandilley.jsonrpc4j</groupId>
 			<artifactId>jsonrpc4j</artifactId>
 			<version>1.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.jws</groupId>
+			<artifactId>jsr181-api</artifactId>
+			<version>1.0-MR1</version>
 		</dependency>
 	</dependencies>
 

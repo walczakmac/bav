@@ -1,4 +1,4 @@
-package com.bav.entity;
+package com.jav.domain.entity;
 
 import lombok.Data;
 
@@ -41,5 +41,7 @@ public class Exclusion implements Serializable {
     @Column(name = "modified_at", nullable = false)
     private Timestamp modifiedAt;
 
-    
+    public Integer getId() {
+        return id;
+    }
 }

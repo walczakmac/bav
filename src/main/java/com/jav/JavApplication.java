@@ -1,13 +1,13 @@
-package com.bav;
+package com.jav;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BavApplication {
+public class JavApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BavApplication.class, args);
+		SpringApplication.run(JavApplication.class, args);
 	}
 
 }

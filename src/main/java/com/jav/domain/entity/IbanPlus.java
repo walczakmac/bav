@@ -1,4 +1,4 @@
-package com.bav.entity;
+package com.jav.domain.entity;
 
 import lombok.Data;
 
@@ -52,6 +52,4 @@ public class IbanPlus implements Serializable {
 
     @Column(name = "modified_at", nullable = false)
     private Timestamp modifiedAt;
-
-    
 }

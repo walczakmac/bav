@@ -1,4 +1,4 @@
-package com.bav.entity;
+package com.jav.domain.entity;
 
 import lombok.Data;
 
