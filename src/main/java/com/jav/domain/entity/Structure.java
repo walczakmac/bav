@@ -67,6 +67,4 @@ public class Structure implements Serializable {
 
     @Column(name = "modified_at", nullable = false)
     private Timestamp modifiedAt;
-
-    
 }

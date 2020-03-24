@@ -40,8 +40,4 @@ public class Exclusion implements Serializable {
 
     @Column(name = "modified_at", nullable = false)
     private Timestamp modifiedAt;
-
-    public Integer getId() {
-        return id;
-    }
 }

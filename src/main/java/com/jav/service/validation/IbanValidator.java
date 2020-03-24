@@ -4,14 +4,13 @@ import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import com.jav.domain.entity.IbanPlus;
 import com.jav.service.resolution.IbanPlusResolver;
 import com.jav.service.IbanValidation;
-import com.jav.service.response.IbanValidationResponse;
+import com.jav.presentation.response.IbanValidationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AutoJsonRpcServiceImpl
@@ -39,9 +38,9 @@ public class IbanValidator implements IbanValidation
         }
 
         try {
-            Optional<IbanPlus> ibanPlus = this.resolver.getIbanPlus(iban);
+            IbanPlus ibanPlus = this.resolver.getIbanPlus(iban);
 
-            return new IbanValidationResponse(errors, ibanPlus.get().getIsoCountryCode(), ibanPlus.get().getIbanBic());
+            return new IbanValidationResponse(errors, ibanPlus.getIsoCountryCode(), ibanPlus.getIbanBic());
         } catch (Exception e) {
             errors.add(IBAN_VALIDATION_ERROR_MESSAGE);
             return new IbanValidationResponse(errors, "", "");
@@ -56,16 +55,16 @@ public class IbanValidator implements IbanValidation
     private int calculateChecksum(String iban)
     {
         iban = iban.substring(4) + iban.substring(0, 4);
-        String checksum = "";
+        StringBuilder checksum = new StringBuilder();
         for (char ch:iban.toCharArray()) {
             if (!Character.isLetter(ch)) {
-                checksum += ch;
+                checksum.append(ch);
                 continue;
             }
 
-            checksum += (int) ch - 55;
+            checksum.append((int) ch - 55);
         }
 
-        return (new BigInteger(checksum)).mod(new BigInteger("97")).intValue();
+        return (new BigInteger(checksum.toString())).mod(new BigInteger("97")).intValue();
     }
 }

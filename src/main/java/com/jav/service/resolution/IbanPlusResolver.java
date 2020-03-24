@@ -20,7 +20,7 @@ public class IbanPlusResolver
     private final ExclusionRepository exclusions;
     private final IbanPlusRepository ibanPluses;
 
-    public Optional<IbanPlus> getIbanPlus(String iban) throws Exception {
+    public IbanPlus getIbanPlus(String iban) throws Exception {
         Structure structure = this.structures.findOneByCountryCode(iban.substring(0, 2));
         String nationalId = iban.substring(structure.getBankIdentifierPosition() - 1, structure.getBankIdentifierPosition() - 1 + structure.getNationalIdLength());
         Optional<Exclusion> exclusion = this.exclusions.findOneByCountryCodeAndIbanNationalId(structure.getCountryCode(), nationalId);
@@ -33,6 +33,6 @@ public class IbanPlusResolver
             throw new Exception(IbanValidator.IBAN_VALIDATION_ERROR_MESSAGE);
         }
 
-        return ibanPlus;
+        return ibanPlus.get();
     }
 }

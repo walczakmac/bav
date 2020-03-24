@@ -1,12 +1,11 @@
 package com.jav.service.resolution;
 
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
+import com.jav.domain.entity.IbanPlus;
 import com.jav.service.BankDetailsResolution;
-import com.jav.service.response.GetBicResponse;
+import com.jav.presentation.response.GetBicResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 @AutoJsonRpcServiceImpl
@@ -18,9 +17,9 @@ public class BankDetailsResolver implements BankDetailsResolution
     @Override
     public GetBicResponse getBic(String iban) {
         try {
-            Optional<com.jav.domain.entity.IbanPlus> ibanPlus = this.resolver.getIbanPlus(iban);
+            IbanPlus ibanPlus = this.resolver.getIbanPlus(iban);
 
-            return new GetBicResponse(ibanPlus.get().getIbanBic());
+            return new GetBicResponse(ibanPlus.getIbanBic());
         } catch (Exception e) {
             return new GetBicResponse("");
         }

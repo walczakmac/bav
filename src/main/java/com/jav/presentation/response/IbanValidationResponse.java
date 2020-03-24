@@ -1,4 +1,4 @@
-package com.jav.service.response;
+package com.jav.presentation.response;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,5 +35,10 @@ public class IbanValidationResponse implements Serializable {
         return Objects.equals(errors, that.errors) &&
                 Objects.equals(countryCode, that.countryCode) &&
                 Objects.equals(bicCode, that.bicCode);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(errors, countryCode, bicCode);
     }
 }

@@ -139,6 +139,4 @@ public class BankDirectory implements Serializable {
 
     @Column(name = "updatedAt", nullable = false)
     private Timestamp updatedAt;
-
-    
 }

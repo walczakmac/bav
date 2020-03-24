@@ -2,7 +2,7 @@ package com.jav.service;
 
 import com.googlecode.jsonrpc4j.JsonRpcParam;
 import com.googlecode.jsonrpc4j.JsonRpcService;
-import com.jav.service.response.IbanValidationResponse;
+import com.jav.presentation.response.IbanValidationResponse;
 
 @JsonRpcService("/validator")
 public interface IbanValidation {
