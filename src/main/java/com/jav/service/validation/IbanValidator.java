@@ -1,10 +1,11 @@
 package com.jav.service.validation;
 
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
+import com.jav.domain.entity.IbanPlus;
 import com.jav.service.resolution.IbanPlusResolver;
 import com.jav.service.IbanValidation;
 import com.jav.service.response.IbanValidationResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigInteger;
@@ -14,14 +15,17 @@ import java.util.Optional;
 
 @Service
 @AutoJsonRpcServiceImpl
-public class IbanValidator implements IbanValidation {
-    @Autowired
-    private IbanPlusResolver resolver;
+@RequiredArgsConstructor
+public class IbanValidator implements IbanValidation
+{
+    private final IbanPlusResolver resolver;
 
+    public static final String INVALID_CHECKSUM_MESSAGE = "Invalid checksum resolved from provided IBAN.";
     public static final String IBAN_VALIDATION_ERROR_MESSAGE = "This is not a valid International Bank Account Number (IBAN).";
 
     @Override
-    public IbanValidationResponse validate(String iban) {
+    public IbanValidationResponse validate(String iban)
+    {
         List<String> errors = new ArrayList<>();
         if (iban.isEmpty()) {
             return new IbanValidationResponse(errors, "", "");
@@ -30,12 +34,12 @@ public class IbanValidator implements IbanValidation {
         iban = this.normalizeIban(iban);
 
         if (1 != this.calculateChecksum(iban)) {
-            errors.add(IBAN_VALIDATION_ERROR_MESSAGE);
+            errors.add(INVALID_CHECKSUM_MESSAGE);
             return new IbanValidationResponse(errors, "", "");
         }
 
         try {
-            Optional<com.jav.domain.entity.IbanPlus> ibanPlus = this.resolver.getIbanPlus(iban);
+            Optional<IbanPlus> ibanPlus = this.resolver.getIbanPlus(iban);
 
             return new IbanValidationResponse(errors, ibanPlus.get().getIsoCountryCode(), ibanPlus.get().getIbanBic());
         } catch (Exception e) {
@@ -44,11 +48,13 @@ public class IbanValidator implements IbanValidation {
         }
     }
 
-    private String normalizeIban(String iban) {
+    private String normalizeIban(String iban)
+    {
         return iban.toUpperCase().replaceAll("[^a-zA-Z0-9]", "");
     }
 
-    private int calculateChecksum(String iban) {
+    private int calculateChecksum(String iban)
+    {
         iban = iban.substring(4) + iban.substring(0, 4);
         String checksum = "";
         for (char ch:iban.toCharArray()) {
