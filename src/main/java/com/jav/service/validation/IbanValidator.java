@@ -39,6 +39,9 @@ public class IbanValidator implements IbanValidation
 
         try {
             IbanPlus ibanPlus = this.resolver.getIbanPlus(iban);
+            if (null == ibanPlus) {
+                return new IbanValidationResponse(errors, iban.substring(0, 2), null);
+            }
 
             return new IbanValidationResponse(errors, ibanPlus.getIsoCountryCode(), ibanPlus.getIbanBic());
         } catch (Exception e) {
