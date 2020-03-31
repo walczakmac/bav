@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-public class IbanValidationResponse implements Serializable {
+public class IbanValidationResponse {
     List<String> errors;
     String countryCode;
     String bicCode;

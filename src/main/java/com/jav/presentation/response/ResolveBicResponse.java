@@ -2,18 +2,22 @@ package com.jav.presentation.response;
 
 import java.util.Objects;
 
-public class GetBicResponse {
+public class ResolveBicResponse {
     String bic;
 
-    public GetBicResponse(String bic) {
+    public ResolveBicResponse(String bic) {
         this.bic = bic;
+    }
+
+    public String getBic() {
+        return bic;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        GetBicResponse that = (GetBicResponse) o;
+        ResolveBicResponse that = (ResolveBicResponse) o;
         return Objects.equals(bic, that.bic);
     }
 

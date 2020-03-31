@@ -1,7 +1,7 @@
 package com.jav.service.resolution;
 
 import com.jav.domain.entity.IbanPlus;
-import com.jav.presentation.response.GetBicResponse;
+import com.jav.presentation.response.ResolveBicResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,8 +22,8 @@ public class BankDetailsResolverTest {
     public void testException() throws Exception {
         Mockito.when(ibanPlusResolver.getIbanPlus("WRONG_IBAN")).thenThrow(new Exception());
 
-        GetBicResponse expeced = new GetBicResponse("");
-        GetBicResponse actual = bankDetailsResolver.getBic("WRONG_IBAN");
+        ResolveBicResponse expeced = new ResolveBicResponse("");
+        ResolveBicResponse actual = bankDetailsResolver.resolveBic("WRONG_IBAN");
 
         Assertions.assertEquals(expeced, actual);
     }
@@ -34,8 +34,8 @@ public class BankDetailsResolverTest {
         ibanPlus.setIbanBic("SWEDSESSXXX");
 
         Mockito.when(ibanPlusResolver.getIbanPlus("VALID_IBAN")).thenReturn(ibanPlus);
-        GetBicResponse expected = new GetBicResponse("SWEDSESSXXX");
-        GetBicResponse actual = bankDetailsResolver.getBic("VALID_IBAN");
+        ResolveBicResponse expected = new ResolveBicResponse("SWEDSESSXXX");
+        ResolveBicResponse actual = bankDetailsResolver.resolveBic("VALID_IBAN");
 
         Assertions.assertEquals(expected, actual);
     }

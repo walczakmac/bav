@@ -3,7 +3,7 @@ package com.jav.service.resolution;
 import com.googlecode.jsonrpc4j.spring.AutoJsonRpcServiceImpl;
 import com.jav.domain.entity.IbanPlus;
 import com.jav.service.BankDetailsResolution;
-import com.jav.presentation.response.GetBicResponse;
+import com.jav.presentation.response.ResolveBicResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +15,33 @@ public class BankDetailsResolver implements BankDetailsResolution
     private final IbanPlusResolver resolver;
 
     @Override
-    public GetBicResponse getBic(String iban) {
+    public ResolveBicResponse resolveBic(String iban) {
         try {
             IbanPlus ibanPlus = this.resolver.getIbanPlus(iban);
 
-            return new GetBicResponse(ibanPlus.getIbanBic());
+            return new ResolveBicResponse(ibanPlus.getIbanBic());
         } catch (Exception e) {
-            return new GetBicResponse("");
+            return new ResolveBicResponse("");
         }
+    }
+
+    @Override
+    public void resolveBankDetails(String swiftBic) {
+
+    }
+
+    @Override
+    public void resolveBankDetails(String countryCode, String nationalId, String branchBic) {
+
+    }
+
+    @Override
+    public void resolveBankDetails(String countryCode, String institutionName, String swiftBic, String nationalId) {
+
+    }
+
+    @Override
+    public void resolveBankDetails(String countryCode, String city, String bankName, String swiftCode, int limit, int offset, boolean mainBranches) {
+
     }
 }
